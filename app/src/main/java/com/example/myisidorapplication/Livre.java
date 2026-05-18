@@ -1,13 +1,21 @@
 package com.example.myisidorapplication;
 
-public class Livre {
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import java.io.Serializable;
 
+@Entity(tableName = "table_livres") // Indique à Room que cette classe devient une table SQL
+public class Livre implements Serializable {
+
+    @PrimaryKey(autoGenerate = true) // L'ID sera auto-incrémenté automatiquement (1, 2, 3...)
     private int id;
+
     private String titre;
     private String auteur;
     private String isbn;
     private boolean disponible;
 
+    // Constructeur complet
     public Livre(int id, String titre, String auteur, String isbn, boolean disponible) {
         this.id = id;
         this.titre = titre;
@@ -16,6 +24,7 @@ public class Livre {
         this.disponible = disponible;
     }
 
+    // Getters et Setters (Indispensables pour que Room puisse lire et écrire)
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

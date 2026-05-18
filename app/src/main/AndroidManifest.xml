@@ -12,6 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyIsidorApplication">
         <activity
+            android:name=".AddEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

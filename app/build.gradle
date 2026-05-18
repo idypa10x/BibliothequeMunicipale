@@ -38,4 +38,6 @@ dependencies {
     androidTestImplementation libs.espresso.core
     implementation(libs.recyclerview)
     implementation(libs.cardview)
+    implementation libs.room.runtime
+    annotationProcessor libs.room.compiler
 }

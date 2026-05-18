@@ -1,5 +1,6 @@
 package com.example.myisidorapplication;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,45 @@ public class LivreAdapter extends RecyclerView.Adapter<LivreAdapter.LivreViewHol
             holder.tvDisponibilite.setText("Indisponible");
             holder.tvDisponibilite.setBackgroundColor(Color.parseColor("#C62828"));
         }
+
+        // Clic simple : ouvre la fiche détail (Lab 5)
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), DetailActivity.class);
+            intent.putExtra("livre", livre);
+            v.getContext().startActivity(intent);
+        });
+
+        // AJOUT LAB 6 : Clic long pour modifier le livre sélectionné
+        // ÉTAPE MODIFIÉE LAB 7 : Boîte de dialogue pour Choisir entre Modifier et Supprimer
+        holder.itemView.setOnLongClickListener(v -> {
+            if (v.getContext() instanceof MainActivity) {
+                MainActivity mainActivity = (MainActivity) v.getContext();
+
+                // Création d'une boîte de dialogue d'alerte
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(mainActivity);
+                builder.setTitle("Options pour : " + livre.getTitre());
+
+                // Liste des choix
+                String[] options = {"Modifier le livre", "Supprimer le livre"};
+
+                builder.setItems(options, (dialog, which) -> {
+                    if (which == 0) {
+                        // Choix 1 : Modifier
+                        Intent intent = new Intent(mainActivity, AddEditActivity.class);
+                        intent.putExtra(AddEditActivity.EXTRA_MODE, AddEditActivity.MODE_EDIT);
+                        intent.putExtra(AddEditActivity.EXTRA_LIVRE, livre);
+                        intent.putExtra(AddEditActivity.EXTRA_POSITION, position);
+                        mainActivity.lancerModification(intent);
+                    } else if (which == 1) {
+                        // Choix 2 : Supprimer
+                        mainActivity.supprimerLivreDeRoom(livre);
+                    }
+                });
+
+                builder.show();
+            }
+            return true;
+        });
     }
 
     @Override

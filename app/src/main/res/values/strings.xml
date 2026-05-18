@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">My isidorApplication</string>
+    <string name="label_auteur">Auteur : %1$s</string>
+    <string name="label_isbn">ISBN : %1$s</string>
+    <string name="label_statut_disponible">Statut : Disponible</string>
+    <string name="label_statut_indisponible">Statut : Indisponible</string>
+    <string name="title_add_book">Ajouter un livre</string>
+    <string name="hint_title">Titre du livre</string>
+    <string name="hint_author">Auteur</string>
+    <string name="hint_isbn">ISBN</string>
+    <string name="label_book_available">Livre disponible</string>
+    <string name="btn_save">Enregistrer</string>
 </resources>
